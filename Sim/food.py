@@ -1,17 +1,21 @@
+#I really really like cupcakes
 
 class Food:
 
-    def __init__(self):
-        self.amount = 0
+    def __init__(self, max_capacity):
+        self.max_cap = max_capacity
         self.lastAccess = 0
+        self.curr_cap = self.max_cap
 
-    def access(self, time):
-        self.lastAccess = time
+    def updateAmount(self, curr_time):
+        self.curr_cap += (curr_time-self.lastAccess)
+        if self.curr_cap>self.max_cap:
+            self.curr_cap = self.max_cap
+        self.lastAccess = curr_time
+
+    def foodTaken(self, curr_time):
+        self.curr_cap = 0
+        self.lastAccess = curr_time
 
     def getAmount(self):
-
-        #Enter alg from sheet
-
-        ret = self.amount
-        self.amount = 0
-        return ret
+        return self.curr_cap

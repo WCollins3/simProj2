@@ -155,6 +155,7 @@ def runSim(numAgents):
                                             birth = Event("Birth", currTime + gestation, i)
                                             birth.parents = [e.getAgentID(), i]
                                             events.append(birth)
+                                        events.sort(key=lambda x: x.time, reverse = False)
 
                 #check for destination
                 if agents[e.getAgentID()].x == agents[e.getAgentID()].destX and agents[e.getAgentID()].y == agents[e.getAgentID()].destY:
@@ -271,15 +272,21 @@ def runSim(numAgents):
             #Set event for next step taken
             nextStep = Event("TakeStep", currTime + ag.movement, ag.agentId)
             events.append(nextStep)
+            events.sort(key=lambda x: x.time, reverse = False)
         else:
             print(e.getType())
+        len1 = len(events)
         events.remove(e)
+        len2 = len(events)
+        #print(len(events))
+
+        #print(currTime)
     total = 0
     for agent in agents:
         total += agent.deathTime
     total = total / len(agents)
 
-    return total, len(agents), len(agents) - numAgents
+    return total, len(agents), len(agents) - numAgents, currTime
 
 
 
@@ -290,20 +297,24 @@ print(answer)
 lifespans = []
 agents = []
 births = []
+intervals = []
 for i in range(100, 1000, 100):
     numAgents = i
     lifeTotal = 0
     agentTotal = 0
     birthTotal = 0
+    intervalTotal = 0
     print(i)
     for j in range(100):
         answer = runSim(numAgents)
         lifeTotal += answer[0]
         agentTotal += answer[1]
         birthTotal += answer[2]
+        intervalTotal += answer[3]
     lifespans.append(lifeTotal / 100)
     agents.append(agentTotal / 100)
     births.append(birthTotal / 100)
+    intervals.append(intervalTotal / 100)
 
 print(lifespans)
 print(agents)
@@ -320,6 +331,7 @@ def plotValues(values, label, title, saveAs):
 
 plotValues(lifespans, "Average Lifespan", "Average lifespan as starting number of agents increases", "lifeSpan.png")
 plotValues(births, "Average amount of births", "Average amount of births as starting number of agents increases", "births.png")
+plotValues(intervals, "Average length of sim", "Average length of sim as starting number of agents increases", "length.png")
 
 # Current Agent Variable Vals
 # puberty = uniform(12, 15)

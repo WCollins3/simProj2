@@ -15,6 +15,7 @@ class Statistcs:
 
 def runSim(numAgents):
     map = Map()
+    agents_per_time = []
     currTime = 0
     events = []
     agents = []
@@ -87,7 +88,7 @@ def runSim(numAgents):
     #sort events
     events.sort(key=lambda x: x.time, reverse = False)
 
-    while len(events) != 0:
+    while currTime != 100:
         e = events[0]
         currTime = e.getTime()
 
@@ -286,7 +287,7 @@ def runSim(numAgents):
         total += agent.deathTime
     total = total / len(agents)
 
-    return total, len(agents), len(agents) - numAgents, currTime
+    return total, len(agents), len(agents) - numAgents, currTime, agents_per_time
 
 
 

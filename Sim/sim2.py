@@ -2,6 +2,7 @@ from agent import *
 from event import *
 from food import *
 from map import *
+import random
 def check_best_spot(locx, locy, fov, m):
     vals = []
     loc = []
@@ -35,7 +36,7 @@ def has_kids(ag, max):
         return False
     return True
 
-def check_left(ag, list, max):
+def check_left_preg(ag, list, max):
     for agents in list:
         if agents.x+1==ag.x and agents.y == ag.y:
             if has_kids(agents, max) and has_kids(ag, max):
@@ -45,7 +46,7 @@ def check_left(ag, list, max):
                     return True
     return False
 
-def check_right(ag, list, max):
+def check_right_preg(ag, list, max):
     for agents in list:
         if agents.x-1==ag.x and agents.y == ag.y:
             if has_kids(agents, max) and has_kids(ag, max):
@@ -55,7 +56,7 @@ def check_right(ag, list, max):
                     return True
     return False
 
-def check_up(ag, list, max):
+def check_up_preg(ag, list, max):
     for agents in list:
         if agents.x==ag.x and agents.y-1 == ag.y:
             if has_kids(agents, max) and has_kids(ag, max):
@@ -65,7 +66,7 @@ def check_up(ag, list, max):
                     return True
     return False
 
-def check_down(ag, list, max):
+def check_down_preg(ag, list, max):
     for agents in list:
         if agents.x==ag.x and agents.y+1 == ag.y:
             if has_kids(agents, max) and has_kids(ag, max):
@@ -74,6 +75,53 @@ def check_down(ag, list, max):
                 if agents.sex == 0 and ag.sex == 1:
                     return True
     return False
+
+def check_down_birth(ag, list):
+    for agents in list:
+        if agents.x==ag.x and agents.y+1 == ag.y:
+            return False
+    return True
+
+
+def check_up_birth(ag, list):
+    for agents in list:
+        if agents.x==ag.x and agents.y-1 == ag.y:
+            return False
+    return True
+
+
+def check_right_birth(ag, list):
+    for agents in list:
+        if agents.x==ag.x+1 and agents.y == ag.y:
+            return False
+    return True
+
+
+def check_left_birth(ag, list):
+    for agents in list:
+        if agents.x==ag.x and agents.y+1 == ag.y:
+            return False
+    return True
+
+def create_agents(num, max):
+    locs = []
+    agents = []
+    id = 0
+    for n in range(num):
+        x = random.randint(0,49)
+        y = random.randint(0,49)
+        not_found = True
+        i = 0
+        while len(locs)>0 and i < len(locs):
+            if locs[i][0]==x and locs[i][1]==y:
+                i = 0
+                x = random.randint(0,49)
+                y = random.randint(0,49)
+        ag = Agent(0, id, x, y)
+        locs.append([x,y])
+        agents.append(ag)
+    return agents
+
 
 
 

@@ -2,6 +2,7 @@ from agent import *
 from event import *
 from food import *
 from map import *
+import random
 def check_best_spot(locx, locy, fov, m):
     vals = []
     loc = []
@@ -101,6 +102,25 @@ def check_left_birth(ag, list):
         if agents.x==ag.x and agents.y+1 == ag.y:
             return False
     return True
+
+def create_agents(num, max):
+    locs = []
+    agents = []
+    id = 0
+    for n in range(num):
+        x = random.randint(0,49)
+        y = random.randint(0,49)
+        not_found = True
+        i = 0
+        while len(locs)>0 and i < len(locs):
+            if locs[i][0]==x and locs[i][1]==y:
+                i = 0
+                x = random.randint(0,49)
+                y = random.randint(0,49)
+        ag = Agent(0, id, x, y)
+        locs.append([x,y])
+        agents.append(ag)
+    return agents
 
 
 

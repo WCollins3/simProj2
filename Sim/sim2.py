@@ -103,7 +103,7 @@ def check_left_birth(ag, list):
             return False
     return True
 
-def create_agents(num, max):
+def create_agents(num, events):
     locs = []
     agents = []
     id = 0
@@ -117,10 +117,18 @@ def create_agents(num, max):
                 i = 0
                 x = random.randint(0,49)
                 y = random.randint(0,49)
+            i+=1
         ag = Agent(0, id, x, y)
+        events.append(Event("Puberty",ag.puberty, ag.agentId))
+        events.append(Event("Fertility", ag.fert, ag.agentId))
+        events.append(Event("DeathFromAge", ag.lifespan, ag.agentId))
         locs.append([x,y])
         agents.append(ag)
-    return agents
+        id+=1
+
+    return agents, events
+
+
 
 
 

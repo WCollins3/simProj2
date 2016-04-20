@@ -36,7 +36,7 @@
  # 
  #--------------------------------------------------------------------------
 
-from rngs import random
+import random
 from math import log,sqrt,exp
 
 def bernoulli(p):
@@ -45,7 +45,7 @@ def bernoulli(p):
   #NOTE: use 0.0 < p < 1.0                                   
   #========================================================
   
-  if (random() < 1 - p):
+  if (random.random() < 1 - p):
     return(0)
   else:
     return(1)
@@ -68,7 +68,7 @@ def equilikely(a,b):
   #Returns an equilikely distributed integer between a and b inclusive. 
   #NOTE: use a < b
   #===================================================================
-  return (a + int((b - a + 1) * random()))
+  return (a + int((b - a + 1) * random.random()))
 
 def geometric(p):
   #====================================================
@@ -116,7 +116,7 @@ def uniform(a,b):
   #NOTE: use a < b
   #===========================================================
   #
-  return (a + (b - a) * random())
+  return (a + (b - a) * random.random())
 
 def exponential(m):
   #=========================================================

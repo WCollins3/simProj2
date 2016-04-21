@@ -37,75 +37,79 @@ def check_best_spot(locx, locy, fov, m, curr_time):
             best_index = i
     return loc[best_index]
 
-def has_kids(ag, max):
-    if ag.preg or ag.is_fertile==False or ag.wealth<(ag.met*0.75+max/2):
+def has_kids(ag, mx):
+    if ag.preg or ag.is_fertile==False or ag.wealth<(ag.met*0.75+mx/2.0):
         return False
     return True
 
-def check_left_preg(ag, list, max):
+def check_left_preg(ag, list, mx, curr_time):
     for agents in list:
-        if agents.x+1==ag.x and agents.y == ag.y:
-            if has_kids(agents, max) and has_kids(ag, max):
+        if agents.x+1==ag.x and agents.y == ag.y and curr_time-agents.when_born+0.75<agents.lifespan and \
+                                curr_time-ag.when_born+0.75<ag.lifespan:
+            if has_kids(agents, mx) and has_kids(ag, mx):
                 if agents.sex == 1 and ag.sex == 0:
-                    return True
+                    return True, agents
                 if agents.sex == 0 and ag.sex == 1:
-                    return True
-    return False
+                    return True, agents
+    return False, None
 
-def check_right_preg(ag, list, max):
+def check_right_preg(ag, list, mx, curr_time):
     for agents in list:
-        if agents.x-1==ag.x and agents.y == ag.y:
-            if has_kids(agents, max) and has_kids(ag, max):
+        if agents.x-1==ag.x and agents.y == ag.y and curr_time-agents.when_born+0.75<agents.lifespan and \
+                                curr_time-ag.when_born+0.75<ag.lifespan:
+            if has_kids(agents, mx) and has_kids(ag, mx):
                 if agents.sex == 1 and ag.sex == 0:
-                    return True
+                    return True, agents
                 if agents.sex == 0 and ag.sex == 1:
-                    return True
-    return False
+                    return True, agents
+    return False, None
 
-def check_up_preg(ag, list, max):
+def check_up_preg(ag, list, mx, curr_time):
     for agents in list:
-        if agents.x==ag.x and agents.y-1 == ag.y:
-            if has_kids(agents, max) and has_kids(ag, max):
+        if agents.x==ag.x and agents.y-1 == ag.y and curr_time-agents.when_born+0.75<agents.lifespan and \
+                                curr_time-ag.when_born+0.75<ag.lifespan:
+            if has_kids(agents, mx) and has_kids(ag, mx):
                 if agents.sex == 1 and ag.sex == 0:
-                    return True
+                    return True, agents
                 if agents.sex == 0 and ag.sex == 1:
-                    return True
-    return False
+                    return True, agents
+    return False, None
 
-def check_down_preg(ag, list, max):
+def check_down_preg(ag, list, mx, curr_time):
     for agents in list:
-        if agents.x==ag.x and agents.y+1 == ag.y:
-            if has_kids(agents, max) and has_kids(ag, max):
+        if agents.x==ag.x and agents.y+1 == ag.y and curr_time-agents.when_born+0.75<agents.lifespan and \
+                                curr_time-ag.when_born+0.75<ag.lifespan:
+            if has_kids(agents, mx) and has_kids(ag, mx):
                 if agents.sex == 1 and ag.sex == 0:
-                    return True
+                    return True, agents
                 if agents.sex == 0 and ag.sex == 1:
-                    return True
-    return False
+                    return True, agents
+    return False, None
 
 def check_down_birth(ag, list):
     for agents in list:
-        if agents.x==ag.x and agents.y+1 == ag.y:
+        if agents.x==ag.x and agents.y-1 == ag.y and agents.y-1>=0:
             return False
     return True
 
 
 def check_up_birth(ag, list):
     for agents in list:
-        if agents.x==ag.x and agents.y-1 == ag.y:
+        if agents.x==ag.x and agents.y+1 == ag.y and agents.y+1<50:
             return False
     return True
 
 
 def check_right_birth(ag, list):
     for agents in list:
-        if agents.x==ag.x+1 and agents.y == ag.y:
-            return False
+        if agents.x+1==ag.x and agents.y == ag.y and agents.x+1<50:
+            return False, agents
     return True
 
 
 def check_left_birth(ag, list):
     for agents in list:
-        if agents.x==ag.x and agents.y+1 == ag.y:
+        if agents.x-1==ag.x and agents.y == ag.y and agents.x-1>=0:
             return False
     return True
 
@@ -116,7 +120,6 @@ def create_agents(num, events):
     for n in range(num):
         x = random.randint(0,49)
         y = random.randint(0,49)
-        not_found = True
         i = 0
         while len(locs)>0 and i < len(locs):
             if locs[i][0]==x and locs[i][1]==y:
@@ -151,8 +154,61 @@ def movement(ag, m, curr_time, events):
     else:
         dist = abs(ag.y - ag.destY)
     events.append(Event("Movement", curr_time+calc_move_time(dist), ag.agentId))
+    return events
 
-def sim(num_agents, max_wealth, end_time):
+def pregnancy(ag, curr_time, events, agents, mx):
+    check, other_ag = check_up_preg(ag, agents, mx, curr_time)
+    if check:
+        events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
+        print("Birth")
+        ag.preg = True
+        other_ag.preg = True
+        for i in events:
+            if i.agent_id == ag.agentId or i.agent_id == other_ag.preg:
+                if i.type == "Movement":
+                    i.time += 0.75
+        return events
+    check, other_ag = check_down_preg(ag, agents, mx, curr_time)
+    if check:
+        events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
+        print("Birth")
+        ag.preg = True
+        other_ag.preg = True
+        for i in events:
+            if i.agent_id == ag.agentId or i.agent_id == other_ag.preg:
+                if i.type == "Movement":
+                    i.time += 0.75
+        return events
+    check, other_ag = check_left_preg(ag, agents, mx, curr_time)
+    if check:
+        events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
+        print("birth")
+        ag.preg = True
+        other_ag.preg = True
+        for i in events:
+            if i.agent_id == ag.agentId or i.agent_id == other_ag.preg:
+                if i.type == "Movement":
+                    i.time += 0.75
+        return events
+    check, other_ag = check_right_preg(ag, agents, mx, curr_time)
+    if check:
+        events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
+        print("birth")
+        ag.preg = True
+        other_ag.preg = True
+        for i in events:
+            if i.agent_id == ag.agentId or i.agent_id == other_ag.preg:
+                if i.type == "Movement":
+                    i.time += 0.75
+        return events
+    return events
+
+def birth():
+
+
+    return 0
+
+def sim(num_agents, mx_wealth, end_time):
     agents, events = create_agents(num_agents, [])
     sim_map = Map()
     #for i in range(50):
@@ -170,7 +226,7 @@ def sim(num_agents, max_wealth, end_time):
         events.append(Event("Movement", calc_move_time(dist), ag.agentId))
     curr_time = 0
     events.sort(key=lambda x: x.time, reverse = False)
-    while curr_time<=end_time and len(events)>0:
+    while curr_time<=end_time: #and len(events)>0:
         ev = events[0]
         #print(ev.type, ev.time)
         ag = agents[ev.agent_id]
@@ -178,12 +234,13 @@ def sim(num_agents, max_wealth, end_time):
         for i in agents:
             if i.alive:
                 count+=1
-        #print(count, curr_time)
+        print(count, curr_time, ev.type, len(events))
         if not ag.alive:
             events.pop(0)
             continue
         else:
             curr_time = ev.time
+            #print(curr_time)
             if ev.type=="Movement":
                 curr_time = ev.time
                 #print("hurr")
@@ -197,20 +254,64 @@ def sim(num_agents, max_wealth, end_time):
                 #print(food_gained)
                 sim_map.grid[ag.destX][ag.destY].foodTaken(curr_time)
                 #print(sim_map.grid[ag.destX][ag.destY].amount)
-                movement(ag, sim_map.grid, curr_time, events)
-                events.sort(key = lambda x:x.time, reverse = False)
+                events = movement(ag, sim_map.grid, curr_time, events)
+                events = pregnancy(ag, curr_time, events, agents, mx_wealth)
+                events.sort(key=lambda x: x.time, reverse = False)
             elif ev.type=="Puberty":
-                events.pop(0)
+                #print("Pub")
+                events.remove(ev)
                 ag.hitPuberty(curr_time)
             elif ev.type=="Fertility":
-                events.pop(0)
+                events.remove(ev)
+                ag.stopFert(curr_time)
             elif ev.type=="DeathFromAge":
                 ag.alive = False
-                events.pop(0)
+                ag.dies()
+                events.remove(ev)
+            elif ev.type == "Birth":
+                events.remove(ev)
+                #print("Birth")
+                other_ag = ev.parents[1]
+                ag.preg = False
+                other_ag.preg = False
+                x = ag.x
+                y = ag.y
+                if check_up_birth(ag, agents):
+                    y += 1
+                elif check_down_birth(ag, agents):
+                    y -= 1
+                elif check_right_birth(ag, agents):
+                    x += 1
+                elif check_left_birth(ag, agents):
+                    x -= 1
+                else:
+                    x = random.randint(0,49)
+                    y = random.randint(0,49)
+                    i = 0
+                    while i < len(agents):
+                        if agents[i].x==x and agents[i].y==y:
+                            i = 0
+                            x = random.randint(0,49)
+                            y = random.randint(0,49)
+                        i+=1
+                new_ag = Agent(curr_time, len(agents), x, y)
+                agents.append(new_ag)
+                events.append(Event("Puberty",new_ag.puberty+curr_time, new_ag.agentId))
+                events.append(Event("Fertility", new_ag.fert+curr_time, new_ag.agentId))
+                events.append(Event("DeathFromAge", new_ag.lifespan+curr_time, new_ag.agentId))
+                loc = check_best_spot(new_ag.x,new_ag.y,new_ag.fov, sim_map.grid, 0)
+                new_ag.destX = loc[0]
+                new_ag.destY = loc[1]
+                if not new_ag.x == new_ag.destX:
+                    dist = abs(new_ag.x-new_ag.destX)
+                else:
+                    dist = abs(new_ag.y - new_ag.destY)
+                #print(calc_move_time(dist))
+                events.append(Event("Movement", curr_time+calc_move_time(dist), new_ag.agentId))
+                events.sort(key=lambda x: x.time, reverse = False)
     return events
 
-sim(25,100.0,3000.0)
 
 
 
-
+sim(400, 100.0, 150.0)

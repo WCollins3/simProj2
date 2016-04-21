@@ -41,12 +41,14 @@ class Agent:
         self.lastTime = curr_time
         if curr_time-self.when_born > self.lifespan and self.alive:
             self.alive = False
+            self.dies()
             self.deathTime = curr_time
         if self.wealth <= 0 and self.alive:
             self.alive = False
+            self.dies()
             self.deathTime = curr_time
 
-    def gainWealth(self, curr_time, food_gained):
+    def gainWealth(self, food_gained):
         self.wealth += food_gained
         #self.lastTime = curr_time        Commented out because no food consumption
 

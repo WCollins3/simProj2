@@ -1,7 +1,6 @@
 from agent import *
 from food import *
 from event import *
-from map import *
 import rngs
 import rvgs
 import matplotlib.pyplot as plt

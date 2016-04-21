@@ -4,7 +4,7 @@ from food import *
 from map import *
 import rvgs
 import random
-import math
+import matplotlib.pyplot as plt
 def check_best_spot(locx, locy, fov, m, curr_time):
     vals = []
     loc = []
@@ -209,8 +209,12 @@ def birth():
     return 0
 
 def sim(num_agents, mx_wealth, end_time):
+    population = []
     agents, events = create_agents(num_agents, [])
+    agents.append(Agent(0,-1,-1,-1))
     sim_map = Map()
+    for i in range(20,end_time+1, 20):
+        events.append(Event("Check", i,-1))
     #for i in range(50):
      #   for j in range(50):
       #      print(sim_map.grid[i][j].getAmount())
@@ -234,7 +238,7 @@ def sim(num_agents, mx_wealth, end_time):
         for i in agents:
             if i.alive:
                 count+=1
-        print(count, curr_time, ev.type, len(events))
+        #print(count, curr_time, ev.type, len(events))
         if not ag.alive:
             events.pop(0)
             continue
@@ -309,9 +313,15 @@ def sim(num_agents, mx_wealth, end_time):
                 #print(calc_move_time(dist))
                 events.append(Event("Movement", curr_time+calc_move_time(dist), new_ag.agentId))
                 events.sort(key=lambda x: x.time, reverse = False)
-    return events
+            elif ev.type== "Check":
+                count = 0
+                for a in agents:
+                    if a.alive:
+                        count+=1
+                population.append(count)
+    return population
 
 
 
 
-sim(400, 100.0, 150.0)
+pop = sim(400, 100.0, 200)

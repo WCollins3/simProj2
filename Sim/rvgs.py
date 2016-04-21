@@ -124,7 +124,7 @@ def exponential(m):
   #NOTE: use m > 0.0
   #=========================================================
   #
-  return (-m * log(1.0 - random()))
+  return (-m * log(1.0 - random.random()))
 
 def erlang(n,b):
   #================================================== 

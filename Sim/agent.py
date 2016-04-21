@@ -73,6 +73,10 @@ class Agent:
         self.destX = x
         self.destY = y
 
+    def dies(self):
+        self.destX = -1
+        self.destY = -1
+
 
 
 

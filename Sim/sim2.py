@@ -2,6 +2,7 @@ from agent import *
 from event import *
 from food import *
 from map import *
+import rvgs
 import random
 def check_best_spot(locx, locy, fov, m):
     vals = []
@@ -128,6 +129,16 @@ def create_agents(num, events):
 
     return agents, events
 
+def calc_move_time(dist):
+    total = 0
+    for i in range(dist):
+        total+=(0.5+rvgs.exponential(0.5))
+    return total
+
+def sim(num_agents, max_wealth):
+    agents, events = create_agents(num_agents, [])
+    events.sort(key=lambda x: x.time, reverse = False)
+    return events
 
 
 

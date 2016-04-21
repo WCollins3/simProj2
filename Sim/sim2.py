@@ -2,6 +2,7 @@ from agent import *
 from event import *
 from food import *
 from map import *
+import rvgs
 import random
 def check_best_spot(locx, locy, fov, m):
     vals = []
@@ -103,7 +104,7 @@ def check_left_birth(ag, list):
             return False
     return True
 
-def create_agents(num, max):
+def create_agents(num, events):
     locs = []
     agents = []
     id = 0
@@ -117,10 +118,28 @@ def create_agents(num, max):
                 i = 0
                 x = random.randint(0,49)
                 y = random.randint(0,49)
+            i+=1
         ag = Agent(0, id, x, y)
+        events.append(Event("Puberty",ag.puberty, ag.agentId))
+        events.append(Event("Fertility", ag.fert, ag.agentId))
+        events.append(Event("DeathFromAge", ag.lifespan, ag.agentId))
         locs.append([x,y])
         agents.append(ag)
-    return agents
+        id+=1
+
+    return agents, events
+
+def calc_move_time(dist):
+    total = 0
+    for i in range(dist):
+        total+=(0.5+rvgs.exponential(0.5))
+    return total
+
+def sim(num_agents, max_wealth):
+    agents, events = create_agents(num_agents, [])
+    events.sort(key=lambda x: x.time, reverse = False)
+    return events
+
 
 
 

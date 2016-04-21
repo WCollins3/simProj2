@@ -160,7 +160,7 @@ def pregnancy(ag, curr_time, events, agents, mx):
     check, other_ag = check_up_preg(ag, agents, mx, curr_time)
     if check:
         events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
-        print("Birth")
+       # print("Birth")
         ag.preg = True
         other_ag.preg = True
         for i in events:
@@ -171,7 +171,7 @@ def pregnancy(ag, curr_time, events, agents, mx):
     check, other_ag = check_down_preg(ag, agents, mx, curr_time)
     if check:
         events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
-        print("Birth")
+        #print("Birth")
         ag.preg = True
         other_ag.preg = True
         for i in events:
@@ -182,7 +182,7 @@ def pregnancy(ag, curr_time, events, agents, mx):
     check, other_ag = check_left_preg(ag, agents, mx, curr_time)
     if check:
         events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
-        print("birth")
+        #print("birth")
         ag.preg = True
         other_ag.preg = True
         for i in events:
@@ -193,7 +193,7 @@ def pregnancy(ag, curr_time, events, agents, mx):
     check, other_ag = check_right_preg(ag, agents, mx, curr_time)
     if check:
         events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
-        print("birth")
+        #print("birth")
         ag.preg = True
         other_ag.preg = True
         for i in events:
@@ -238,7 +238,7 @@ def sim(num_agents, mx_wealth, end_time):
         for i in agents:
             if i.alive:
                 count+=1
-        #print(count, curr_time, ev.type, len(events))
+        print(count, curr_time, ev.type, len(events))
         if not ag.alive:
             events.pop(0)
             continue
@@ -299,6 +299,7 @@ def sim(num_agents, mx_wealth, end_time):
                             y = random.randint(0,49)
                         i+=1
                 new_ag = Agent(curr_time, len(agents), x, y)
+                new_ag.other_constructor(ag.puberty, other_ag.puberty, ag.lifespan, other_ag.lifespan,ag.fov, other_ag.fov, ag.met, other_ag.met)
                 agents.append(new_ag)
                 events.append(Event("Puberty",new_ag.puberty+curr_time, new_ag.agentId))
                 events.append(Event("Fertility", new_ag.fert+curr_time, new_ag.agentId))
@@ -314,6 +315,7 @@ def sim(num_agents, mx_wealth, end_time):
                 events.append(Event("Movement", curr_time+calc_move_time(dist), new_ag.agentId))
                 events.sort(key=lambda x: x.time, reverse = False)
             elif ev.type== "Check":
+                events.remove(ev)
                 count = 0
                 for a in agents:
                     if a.alive:

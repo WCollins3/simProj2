@@ -213,7 +213,8 @@ def sim(num_agents, mx_wealth, end_time):
     agents, events = create_agents(num_agents, [])
     agents.append(Agent(0,-1,-1,-1))
     sim_map = Map()
-    for i in range(20,end_time+1, 20):
+    people = []
+    for i in range(5,end_time+1, 5):
         events.append(Event("Check", i,-1))
     #for i in range(50):
      #   for j in range(50):
@@ -230,7 +231,7 @@ def sim(num_agents, mx_wealth, end_time):
         events.append(Event("Movement", calc_move_time(dist), ag.agentId))
     curr_time = 0
     events.sort(key=lambda x: x.time, reverse = False)
-    while curr_time<=end_time: #and len(events)>0:
+    while curr_time<=end_time and len(events) != 0: #and len(events)>0:
         ev = events[0]
         #print(ev.type, ev.time)
         ag = agents[ev.agent_id]
@@ -238,7 +239,7 @@ def sim(num_agents, mx_wealth, end_time):
         for i in agents:
             if i.alive:
                 count+=1
-        print(count, curr_time, ev.type, len(events))
+        #print(count, curr_time, ev.type, len(events))
         if not ag.alive:
             events.pop(0)
             continue
@@ -321,9 +322,115 @@ def sim(num_agents, mx_wealth, end_time):
                     if a.alive:
                         count+=1
                 population.append(count)
-    return population
+
+    agPub = 0
+    agFov = 0
+    agMet = 0
+    agDeath = 0
+    agDeathCount = 0
+    for a in agents:
+        agPub += a.puberty
+        agFov += a.fov
+        agMet += a.met
+        if a.alive == False:
+            agDeath += a.deathTime
+            agDeathCount += 1
+    return population, agPub/len(agents), agFov/len(agents), agMet//len(agents), agDeath/len(agents)
+
+
+pops = []
+xs= []
+pubs = []
+fovs = []
+mets = []
+deaths = []
+for i in range(100, 1000, 100):
+    pop = []
+    pub = 0
+    fov = 0
+    met = 0
+    death = 0
+    for j in range(1):
+        print(j, i)
+        s = sim(i, 100, 1000)
+        pop += s[0]
+        pub += s[1]
+        fov += s[2]
+        met += s[3]
+        death += s[4]
+    pops.append(pop)
+    xVals = []
+    count = 5
+    for num in pop:
+        xVals.append(count)
+        count += 5
+    xs.append(xVals)
+    plt.scatter(xVals, pop)
+    plt.plot(xVals, pop)
+    plt.title("Population as time increases")
+    plt.ylabel("Population")
+    plt.xlabel("Time")
+    plt.savefig("Population" + str(i) + ".png")
+    plt.clf()
+
+    pubs.append(pub)
+    fovs.append(fov)
+    mets.append(met)
+    deaths.append(death)
+
+for i in range(len(pops)):
+    plt.scatter(xs[i], pops[i], label=str((i + 1)*100)+" starting agents")
+plt.legend()
+plt.savefig("allPops.png")
+plt.clf()
+
+xVals = range(100, 1000, 100)
+plt.plot(xVals, pubs)
+plt.title("Average Puberty age as starting population increases")
+plt.ylabel("Puberty age")
+plt.xlabel("Starting amount of agents")
+plt.savefig("pubs.png")
+plt.clf()
+
+plt.plot(xVals, fovs)
+plt.title("Average Field of view as starting population increases")
+plt.ylabel("Field of view")
+plt.xlabel("Starting amount of agents")
+plt.savefig("fov.png")
+plt.clf()
+
+plt.plot(xVals, mets)
+plt.title("Average metabolism as starting population increases")
+plt.ylabel("metabolism")
+plt.xlabel("Starting amount of agents")
+plt.savefig("fov.png")
+plt.clf()
+
+plt.plot(xVals, pubs)
+plt.title("Average death age as starting population increases")
+plt.ylabel("Death age")
+plt.xlabel("Starting amount of agents")
+plt.savefig("death.png")
+plt.clf()
+
+
+# pop = sim(400, 100.0, 250)
+# print(pop[0])
+# #xVals = range(5, 250 + 1, 5)
+# xVals = []
+# count = 5
+# for num in pop:
+#     xVals.append(count)
+#     count += 5
+# print(len(pop))
+# print(len(xVals))
+#
+# plt.scatter(xVals, pop)
+# plt.plot(xVals, pop)
+# plt.title("Population as time increases")
+# plt.ylabel("Population")
+# plt.xlabel("Time")
+# plt.savefig("Population.png")
 
 
 
-
-pop = sim(400, 100.0, 200)

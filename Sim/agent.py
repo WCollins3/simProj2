@@ -16,7 +16,6 @@ class Agent:
         self.fov = rvgs.equilikely(1,6)
         self.met = rvgs.uniform(1,4)
         self.fert = 0
-        self.movement = rvgs.equilikely(10, 20)
         self.preg = False
         self.deathTime = 0
 
@@ -31,8 +30,19 @@ class Agent:
         self.y = y
         self.destX = 0
         self.destY = 0
-
-
+    def other_constructor(self, pubm, pubd, lifem, lifed, fovm, fovd, metm, metd):
+        pubmin = min([pubm,pubd])
+        pubmax = max([pubm,pubd])
+        self.puberty = rvgs.uniform(pubmin,pubmax)
+        lifemin = min([lifem, lifed])
+        lifemax = max([lifem, lifed])
+        self.lifespan = rvgs.uniform(lifemin, lifemax)
+        fovmin = min([fovm, fovd])
+        fovmax = min([fovm, fovd])
+        self.fov = rvgs.equilikely(fovmin,fovmax)
+        metmin = min([metm, metd])
+        metmax = max([metm,metd])
+        self.met = rvgs.uniform(metmin,metmax)
     def getWealth(self):
         return self.wealth
 

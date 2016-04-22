@@ -6,7 +6,7 @@ class Food:
         self.curr_cap = self.max_cap
 
     def updateAmount(self, curr_time): #call before getAmount
-        self.curr_cap += (curr_time-self.lastAccess)
+        self.curr_cap += ((curr_time-self.lastAccess))
         if self.curr_cap>self.max_cap:
             self.curr_cap = self.max_cap
         #self.lastAccess = curr_time    Commented out because it will cause food to decrease with udated time

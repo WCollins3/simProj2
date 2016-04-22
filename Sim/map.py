@@ -10,16 +10,17 @@ class Map:
     def __init__(self):
         self.x = 50
         self.y = 50
-        self.grid = 50*[50*[0]]
+        self.grid = []
+        for i in range(50):
+            self.grid.append([])
         for i in range(50):
             #array = []
             for j in range(50):
                 val = abs(bigf(i+1, 50, j+1, 50))
-                #array.append(val)
-                self.grid[i][j] = Food(val)
+                #print(val)
+                self.grid[i].append(Food(val))
 
 
     def getFood(self, x, y):
         return self.grid[x][y]
 
-#m = Map()

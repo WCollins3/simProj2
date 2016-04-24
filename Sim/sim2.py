@@ -37,54 +37,68 @@ def check_best_spot(locx, locy, fov, m, curr_time):
             best_index = i
     return loc[best_index]
 
-def has_kids(ag, mx):
-    if ag.preg or ag.is_fertile==False or ag.wealth<(ag.met*0.75+mx/2.0):
-        return False
-    return True
+def has_kids(ag, mx,preg_check, poor, not_fertile, already_preg):
+    preg_check += 1
+    if ag.preg==False and ag.is_fertile==True and ag.wealth>(ag.met*0.75+mx/2.0):
+        return True, preg_check, poor, not_fertile, already_preg
+    if ag.preg:
+        already_preg+=1
+    if ag.is_fertile==False:
+        not_fertile+=1
+    if ag.wealth<(ag.met*0.75+mx/2.0):
+        poor += 1
+    return False,preg_check, poor, not_fertile, already_preg
 
-def check_left_preg(ag, list, mx, curr_time):
+def check_left_preg(ag, list, mx, curr_time,preg_check, poor, not_fertile, already_preg):
     for agents in list:
         if agents.x+1==ag.x and agents.y == ag.y and curr_time-agents.when_born+0.75<agents.lifespan and \
                                 curr_time-ag.when_born+0.75<ag.lifespan:
-            if has_kids(agents, mx) and has_kids(ag, mx):
+            agents_bool,preg_check, poor, not_fertile, already_preg = has_kids(agents,mx,preg_check, poor, not_fertile, already_preg)
+            ag_bool,preg_check, poor, not_fertile, already_preg = has_kids(ag, mx,preg_check, poor, not_fertile, already_preg)
+            if agents_bool and ag_bool:
                 if agents.sex == 1 and ag.sex == 0:
-                    return True, agents
+                    return True, agents,preg_check, poor, not_fertile, already_preg
                 if agents.sex == 0 and ag.sex == 1:
-                    return True, agents
-    return False, None
+                    return True, agents,preg_check, poor, not_fertile, already_preg
+    return False, None,preg_check, poor, not_fertile, already_preg
 
-def check_right_preg(ag, list, mx, curr_time):
+def check_right_preg(ag, list, mx, curr_time,preg_check, poor, not_fertile, already_preg):
     for agents in list:
         if agents.x-1==ag.x and agents.y == ag.y and curr_time-agents.when_born+0.75<agents.lifespan and \
                                 curr_time-ag.when_born+0.75<ag.lifespan:
-            if has_kids(agents, mx) and has_kids(ag, mx):
+            agents_bool,preg_check, poor, not_fertile, already_preg = has_kids(agents,mx,preg_check, poor, not_fertile, already_preg)
+            ag_bool,preg_check, poor, not_fertile, already_preg = has_kids(ag, mx,preg_check, poor, not_fertile, already_preg)
+            if agents_bool and ag_bool:
                 if agents.sex == 1 and ag.sex == 0:
-                    return True, agents
+                    return True, agents,preg_check, poor, not_fertile, already_preg
                 if agents.sex == 0 and ag.sex == 1:
-                    return True, agents
-    return False, None
+                    return True, agents,preg_check, poor, not_fertile, already_preg
+    return False, None,preg_check, poor, not_fertile, already_preg
 
-def check_up_preg(ag, list, mx, curr_time):
+def check_up_preg(ag, list, mx, curr_time,preg_check, poor, not_fertile, already_preg):
     for agents in list:
         if agents.x==ag.x and agents.y-1 == ag.y and curr_time-agents.when_born+0.75<agents.lifespan and \
                                 curr_time-ag.when_born+0.75<ag.lifespan:
-            if has_kids(agents, mx) and has_kids(ag, mx):
+            agents_bool,preg_check, poor, not_fertile, already_preg = has_kids(agents,mx,preg_check, poor, not_fertile, already_preg)
+            ag_bool,preg_check, poor, not_fertile, already_preg = has_kids(ag, mx,preg_check, poor, not_fertile, already_preg)
+            if agents_bool and ag_bool:
                 if agents.sex == 1 and ag.sex == 0:
-                    return True, agents
+                    return True, agents,preg_check, poor, not_fertile, already_preg
                 if agents.sex == 0 and ag.sex == 1:
-                    return True, agents
-    return False, None
-
-def check_down_preg(ag, list, mx, curr_time):
+                    return True, agents,preg_check, poor, not_fertile, already_preg
+    return False, None,preg_check, poor, not_fertile, already_preg
+def check_down_preg(ag, list, mx, curr_time,preg_check, poor, not_fertile, already_preg):
     for agents in list:
         if agents.x==ag.x and agents.y+1 == ag.y and curr_time-agents.when_born+0.75<agents.lifespan and \
                                 curr_time-ag.when_born+0.75<ag.lifespan:
-            if has_kids(agents, mx) and has_kids(ag, mx):
+            agents_bool,preg_check, poor, not_fertile, already_preg = has_kids(agents,mx,preg_check, poor, not_fertile, already_preg)
+            ag_bool,preg_check, poor, not_fertile, already_preg = has_kids(ag, mx,preg_check, poor, not_fertile, already_preg)
+            if agents_bool and ag_bool:
                 if agents.sex == 1 and ag.sex == 0:
-                    return True, agents
+                    return True, agents,preg_check, poor, not_fertile, already_preg
                 if agents.sex == 0 and ag.sex == 1:
-                    return True, agents
-    return False, None
+                    return True, agents,preg_check, poor, not_fertile, already_preg
+    return False, None,preg_check, poor, not_fertile, already_preg
 
 def check_down_birth(ag, list):
     for agents in list:
@@ -156,8 +170,8 @@ def movement(ag, m, curr_time, events):
     events.append(Event("Movement", curr_time+calc_move_time(dist), ag.agentId))
     return events
 
-def pregnancy(ag, curr_time, events, agents, mx):
-    check, other_ag = check_up_preg(ag, agents, mx, curr_time)
+def pregnancy(ag, curr_time, events, agents, mx, preg_check, poor, not_fertile, already_preg):
+    check, other_ag, preg_check, poor, not_fertile, already_preg = check_up_preg(ag, agents, mx, curr_time,preg_check, poor, not_fertile, already_preg)
     if check:
         events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
        # print("Birth")
@@ -167,8 +181,8 @@ def pregnancy(ag, curr_time, events, agents, mx):
             if i.agent_id == ag.agentId or i.agent_id == other_ag.preg:
                 if i.type == "Movement":
                     i.time += 0.75
-        return events
-    check, other_ag = check_down_preg(ag, agents, mx, curr_time)
+        return events, preg_check, poor, not_fertile, already_preg
+    check, other_ag, preg_check, poor, not_fertile, already_preg = check_down_preg(ag, agents, mx, curr_time,preg_check, poor, not_fertile, already_preg)
     if check:
         events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
         #print("Birth")
@@ -178,8 +192,8 @@ def pregnancy(ag, curr_time, events, agents, mx):
             if i.agent_id == ag.agentId or i.agent_id == other_ag.preg:
                 if i.type == "Movement":
                     i.time += 0.75
-        return events
-    check, other_ag = check_left_preg(ag, agents, mx, curr_time)
+        return events, preg_check, poor, not_fertile, already_preg
+    check, other_ag, preg_check, poor, not_fertile, already_preg = check_left_preg(ag, agents, mx, curr_time, preg_check, poor, not_fertile, already_preg)
     if check:
         events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
         #print("birth")
@@ -189,8 +203,8 @@ def pregnancy(ag, curr_time, events, agents, mx):
             if i.agent_id == ag.agentId or i.agent_id == other_ag.preg:
                 if i.type == "Movement":
                     i.time += 0.75
-        return events
-    check, other_ag = check_right_preg(ag, agents, mx, curr_time)
+        return events, preg_check, poor, not_fertile, already_preg
+    check, other_ag, preg_check, poor, not_fertile, already_preg = check_right_preg(ag, agents, mx, curr_time,preg_check, poor, not_fertile, already_preg)
     if check:
         events.append(Event("Birth", curr_time+0.75, ag.agentId, [ag, other_ag]))
         #print("birth")
@@ -200,8 +214,8 @@ def pregnancy(ag, curr_time, events, agents, mx):
             if i.agent_id == ag.agentId or i.agent_id == other_ag.preg:
                 if i.type == "Movement":
                     i.time += 0.75
-        return events
-    return events
+        return events, preg_check, poor, not_fertile, already_preg
+    return events, preg_check, poor, not_fertile, already_preg
 
 def birth():
 
@@ -213,7 +227,10 @@ def sim(num_agents, mx_wealth, end_time):
     agents, events = create_agents(num_agents, [])
     agents.append(Agent(0,-1,-1,-1))
     sim_map = Map()
-    people = []
+    pregnancy_check = 0
+    poor = 0
+    not_fertile = 0
+    already_preg = 0
     for i in range(5,end_time+1, 5):
         events.append(Event("Check", i,-1))
     #for i in range(50):
@@ -260,7 +277,7 @@ def sim(num_agents, mx_wealth, end_time):
                 sim_map.grid[ag.destX][ag.destY].foodTaken(curr_time)
                 #print(sim_map.grid[ag.destX][ag.destY].amount)
                 events = movement(ag, sim_map.grid, curr_time, events)
-                events = pregnancy(ag, curr_time, events, agents, mx_wealth)
+                events,pregnancy_check, poor, not_fertile, already_preg = pregnancy(ag, curr_time, events, agents, mx_wealth, pregnancy_check, poor, not_fertile, already_preg)
                 events.sort(key=lambda x: x.time, reverse = False)
             elif ev.type=="Puberty":
                 #print("Pub")
@@ -300,7 +317,7 @@ def sim(num_agents, mx_wealth, end_time):
                             y = random.randint(0,49)
                         i+=1
                 new_ag = Agent(curr_time, len(agents), x, y)
-                new_ag.other_constructor(ag.puberty, other_ag.puberty, ag.lifespan, other_ag.lifespan,ag.fov, other_ag.fov, ag.met, other_ag.met)
+                #new_ag.other_constructor(ag.puberty, other_ag.puberty, ag.lifespan, other_ag.lifespan,ag.fov, other_ag.fov, ag.met, other_ag.met)
                 agents.append(new_ag)
                 events.append(Event("Puberty",new_ag.puberty+curr_time, new_ag.agentId))
                 events.append(Event("Fertility", new_ag.fert+curr_time, new_ag.agentId))
@@ -335,7 +352,7 @@ def sim(num_agents, mx_wealth, end_time):
         if a.alive == False:
             agDeath += a.deathTime
             agDeathCount += 1
-    return population, agPub/len(agents), agFov/len(agents), agMet//len(agents), agDeath/len(agents)
+    return population, agPub/len(agents), agFov/len(agents), agMet//len(agents), agDeath/len(agents),pregnancy_check, poor, not_fertile, already_preg
 
 
 pops = []
@@ -344,12 +361,16 @@ pubs = []
 fovs = []
 mets = []
 deaths = []
-for i in range(100, 1000, 100):
+for i in range(500, 1000, 100):
     pop = []
     pub = 0
     fov = 0
     met = 0
     death = 0
+    preg_check = 0
+    poor = 0
+    not_fertile = 0
+    already_preg = 0
     for j in range(1):
         print(j, i)
         s = sim(i, 100, 1000)
@@ -358,6 +379,11 @@ for i in range(100, 1000, 100):
         fov += s[2]
         met += s[3]
         death += s[4]
+        preg_check += s[5]
+        poor += s[6]
+        not_fertile += s[7]
+        already_preg += s[8]
+    print(preg_check, poor, not_fertile, already_preg)
     pops.append(pop)
     xVals = []
     count = 5
@@ -370,7 +396,7 @@ for i in range(100, 1000, 100):
     plt.title("Population as time increases")
     plt.ylabel("Population")
     plt.xlabel("Time")
-    plt.savefig("Population" + str(i) + ".png")
+    plt.savefig("Population" + str(i) + "noevo.png")
     plt.clf()
 
     pubs.append(pub)
@@ -381,7 +407,7 @@ for i in range(100, 1000, 100):
 for i in range(len(pops)):
     plt.scatter(xs[i], pops[i], label=str((i + 1)*100)+" starting agents")
 plt.legend()
-plt.savefig("allPops.png")
+plt.savefig("allPopsnoevo.png")
 plt.clf()
 
 xVals = range(100, 1000, 100)
@@ -389,28 +415,28 @@ plt.plot(xVals, pubs)
 plt.title("Average Puberty age as starting population increases")
 plt.ylabel("Puberty age")
 plt.xlabel("Starting amount of agents")
-plt.savefig("pubs.png")
+plt.savefig("pubsnoevo.png")
 plt.clf()
 
 plt.plot(xVals, fovs)
 plt.title("Average Field of view as starting population increases")
 plt.ylabel("Field of view")
 plt.xlabel("Starting amount of agents")
-plt.savefig("fov.png")
+plt.savefig("fovnoevo.png")
 plt.clf()
 
 plt.plot(xVals, mets)
 plt.title("Average metabolism as starting population increases")
 plt.ylabel("metabolism")
 plt.xlabel("Starting amount of agents")
-plt.savefig("fov.png")
+plt.savefig("fovnoevo.png")
 plt.clf()
 
 plt.plot(xVals, pubs)
 plt.title("Average death age as starting population increases")
 plt.ylabel("Death age")
 plt.xlabel("Starting amount of agents")
-plt.savefig("death.png")
+plt.savefig("deathnoevo.png")
 plt.clf()
 
 

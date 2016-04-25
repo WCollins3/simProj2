@@ -223,6 +223,10 @@ def birth():
     return 0
 
 def sim(num_agents, mx_wealth, end_time):
+    pregnancy_check_list = []
+    poor_list = []
+    not_fertile_list = []
+    already_preg_list = []
     population = []
     agents, events = create_agents(num_agents, [])
     agents.append(Agent(0,-1,-1,-1))
@@ -339,6 +343,10 @@ def sim(num_agents, mx_wealth, end_time):
                     if a.alive:
                         count+=1
                 population.append(count)
+                pregnancy_check_list.append(pregnancy_check)
+                poor_list.append(poor)
+                not_fertile_list.append(not_fertile)
+                already_preg_list.append(already_preg)
 
     agPub = 0
     agFov = 0
@@ -352,7 +360,7 @@ def sim(num_agents, mx_wealth, end_time):
         if a.alive == False:
             agDeath += a.deathTime
             agDeathCount += 1
-    return population, agPub/len(agents), agFov/len(agents), agMet//len(agents), agDeath/len(agents),pregnancy_check, poor, not_fertile, already_preg
+    return population, agPub/len(agents), agFov/len(agents), agMet//len(agents), agDeath/len(agents),pregnancy_check, poor, not_fertile, already_preg, pregnancy_check_list, poor_list, not_fertile_list, already_preg_list
 
 
 pops = []
@@ -371,6 +379,10 @@ for i in range(500, 1000, 100):
     poor = 0
     not_fertile = 0
     already_preg = 0
+    pregnancy_check_list = []
+    poor_list = []
+    not_fertile_list = []
+    already_preg_list = []
     for j in range(1):
         print(j, i)
         s = sim(i, 100, 1000)
@@ -383,6 +395,24 @@ for i in range(500, 1000, 100):
         poor += s[6]
         not_fertile += s[7]
         already_preg += s[8]
+        pregnancy_check_list = s[9]
+        poor_list = s[10]
+        not_fertile_list = s[11]
+        already_preg_list = s[12]
+        xvals = []
+        cnt = 5
+        for num in pregnancy_check_list:
+            xvals.append(cnt)
+            cnt += 5
+        plt.scatter(xvals, pregnancy_check_list, label= "Pregnancy Check", color= "red")
+        plt.scatter(xvals, poor_list, label= "Poor", color= "black")
+        plt.scatter(xvals, not_fertile_list, label= "Not Fertile", color= "Blue")
+        plt.scatter(xvals, already_preg_list, label= "Already Pregnant", color= "yellow")
+        plt.title("Increase in checked values")
+        plt.xlabel("Time")
+        plt.legend()
+        plt.savefig("factors" + str(i) + ".png")
+        plt.clf()
     print(preg_check, poor, not_fertile, already_preg)
     pops.append(pop)
     xVals = []

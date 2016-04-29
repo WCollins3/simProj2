@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.19)  29 APR 2016 00:49
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.19)  29 APR 2016 10:39
 entering extended mode
 **project2.tex
 (C:\cygwin64\home\Bill\workspace\cs397\proj2-2\simProj2\Sim\project2.tex
@@ -155,20 +155,20 @@ Package pdftex.def Info: ResourceCapacity.PNG used on input line 51.
 (pdftex.def)             Requested size: 227.62204pt x 234.72058pt.
  [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] <Population500.png, id=11
-, 578.16pt x 433.62pt>
-File: Population500.png Graphic file (type png)
- <use Population500.png>
-Package pdftex.def Info: Population500.png used on input line 70.
-(pdftex.def)             Requested size: 227.62204pt x 170.71231pt.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 71.
-
-<Population500noevo.png, id=12, 578.16pt x 433.62pt>
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] <Population500noevo.png, 
+id=11, 578.16pt x 433.62pt>
 File: Population500noevo.png Graphic file (type png)
 
 <use Population500noevo.png>
-Package pdftex.def Info: Population500noevo.png used on input line 72.
+Package pdftex.def Info: Population500noevo.png used on input line 70.
+(pdftex.def)             Requested size: 227.62204pt x 170.71231pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 71.
+ <Population500.png, id=12, 578.16pt x 433.62pt>
+File: Population500.png Graphic file (type png)
+
+<use Population500.png>
+Package pdftex.def Info: Population500.png used on input line 72.
 (pdftex.def)             Requested size: 227.62204pt x 170.71231pt.
  <factors500.png, id=13, 578.16pt x 433.62pt>
 File: factors500.png Graphic file (type png)
@@ -197,9 +197,9 @@ Package pdftex.def Info: both.PNG used on input line 84.
  [2 <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/MaxFoodFunction
 .PNG> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/ResourceCapac
 ity.PNG>] [3 <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/Popula
-tion500.png> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/Popula
-tion500noevo.png> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/f
-actors500.png>] [4 <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/
+tion500noevo.png> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/P
+opulation500.png>] [4 <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/S
+im/factors500.png> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/
 FoodCange.PNG> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/Fert
 Change.PNG> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/both.PN
 G>]
@@ -207,7 +207,7 @@ G>]
 Here is how much of TeX's memory you used:
  1295 strings out of 493705
  17900 string characters out of 3142154
- 84344 words of memory out of 3000000
+ 85344 words of memory out of 3000000
  4643 multiletter control sequences out of 15000+200000
  7591 words of font info for 27 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
@@ -217,7 +217,7 @@ Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Pro
 gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
 m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
 iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on project2.pdf (4 pages, 256973 bytes).
+Output written on project2.pdf (4 pages, 259403 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

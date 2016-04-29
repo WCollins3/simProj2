@@ -1,0 +1,225 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.19)  29 APR 2016 00:26
+entering extended mode
+**project2.tex
+(C:\cygwin64\home\Bill\workspace\cs397\proj2-2\simProj2\Sim\project2.tex
+LaTeX2e <2014/05/01>
+Babel <3.9l> and hyphenation patterns for 68 languages loaded.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size11.clo"
+File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\preprint\fullpage.sty"
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip43
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\multicol.sty"
+Package: multicol 2014/08/24 v1.8g multicolumn formatting (FMi)
+\c@tracingmulticols=\count88
+\mult@box=\box26
+\multicol@leftmargin=\dimen105
+\c@unbalance=\count89
+\c@collectmore=\count90
+\doublecol@number=\count91
+\multicoltolerance=\count92
+\multicolpretolerance=\count93
+\full@width=\dimen106
+\page@free=\dimen107
+\premulticols=\dimen108
+\postmulticols=\dimen109
+\multicolsep=\skip44
+\multicolbaselineskip=\skip45
+\partial@page=\box27
+\last@line=\box28
+\maxbalancingoverflow=\dimen110
+\mult@rightbox=\box29
+\mult@grightbox=\box30
+\mult@gfirstbox=\box31
+\mult@firstbox=\box32
+\@tempa=\box33
+\@tempa=\box34
+\@tempa=\box35
+\@tempa=\box36
+\@tempa=\box37
+\@tempa=\box38
+\@tempa=\box39
+\@tempa=\box40
+\@tempa=\box41
+\@tempa=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\c@columnbadness=\count94
+\c@finalcolumnbadness=\count95
+\last@try=\dimen111
+\multicolovershoot=\dimen112
+\multicolundershoot=\dimen113
+\mult@nat@firstbox=\box50
+\colbreak@box=\box51
+\mc@col@check@num=\count96
+)
+(C:\cygwin64\home\Bill\workspace\cs397\proj2-2\simProj2\Sim\project2.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count97
+\scratchdimen=\dimen114
+\scratchbox=\box52
+\nofMPsegments=\count98
+\nofMParguments=\count99
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count100
+\MPscratchDim=\dimen115
+\MPnumerator=\count101
+\makeMPintoPDFobject=\count102
+\everyMPtoPDFconversion=\toks16
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 14.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 14.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 14.
+ <MaxFoodFunction.PNG, id=1, 444.91219pt x 128.73094pt>
+File: MaxFoodFunction.PNG Graphic file (type png)
+
+<use MaxFoodFunction.PNG>
+Package pdftex.def Info: MaxFoodFunction.PNG used on input line 49.
+(pdftex.def)             Requested size: 227.62204pt x 65.8601pt.
+
+<ResourceCapacity.PNG, id=3, 241.65282pt x 249.18094pt>
+File: ResourceCapacity.PNG Graphic file (type png)
+
+<use ResourceCapacity.PNG>
+Package pdftex.def Info: ResourceCapacity.PNG used on input line 51.
+(pdftex.def)             Requested size: 227.62204pt x 234.72058pt.
+ [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] <Population500.png, id=11
+, 578.16pt x 433.62pt>
+File: Population500.png Graphic file (type png)
+ <use Population500.png>
+Package pdftex.def Info: Population500.png used on input line 70.
+(pdftex.def)             Requested size: 227.62204pt x 170.71231pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 71.
+
+<Population500noevo.png, id=12, 578.16pt x 433.62pt>
+File: Population500noevo.png Graphic file (type png)
+
+<use Population500noevo.png>
+Package pdftex.def Info: Population500noevo.png used on input line 72.
+(pdftex.def)             Requested size: 227.62204pt x 170.71231pt.
+ <factors500.png, id=13, 578.16pt x 433.62pt>
+File: factors500.png Graphic file (type png)
+
+<use factors500.png>
+Package pdftex.def Info: factors500.png used on input line 78.
+(pdftex.def)             Requested size: 227.62204pt x 170.71231pt.
+ <FoodCange.PNG, id=14, 274.02374pt x 204.765pt>
+File: FoodCange.PNG Graphic file (type png)
+
+<use FoodCange.PNG>
+Package pdftex.def Info: FoodCange.PNG used on input line 80.
+(pdftex.def)             Requested size: 227.62204pt x 170.09549pt.
+ <FertChange.PNG, id=15, 276.28218pt x 209.28188pt>
+File: FertChange.PNG Graphic file (type png)
+
+<use FertChange.PNG>
+Package pdftex.def Info: FertChange.PNG used on input line 82.
+(pdftex.def)             Requested size: 227.62204pt x 172.42015pt.
+ <both.PNG, id=16, 257.46187pt x 195.73125pt>
+File: both.PNG Graphic file (type png)
+
+<use both.PNG>
+Package pdftex.def Info: both.PNG used on input line 84.
+(pdftex.def)             Requested size: 227.62204pt x 173.0504pt.
+ [2 <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/MaxFoodFunction
+.PNG> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/ResourceCapac
+ity.PNG>] [3 <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/Popula
+tion500.png> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/Popula
+tion500noevo.png> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/f
+actors500.png>] [4 <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/
+FoodCange.PNG> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/Fert
+Change.PNG> <C:/cygwin64/home/Bill/workspace/cs397/proj2-2/simProj2/Sim/both.PN
+G>]
+(C:\cygwin64\home\Bill\workspace\cs397\proj2-2\simProj2\Sim\project2.aux) ) 
+Here is how much of TeX's memory you used:
+ 1295 strings out of 493705
+ 17900 string characters out of 3142154
+ 84344 words of memory out of 3000000
+ 4643 multiletter control sequences out of 15000+200000
+ 7591 words of font info for 27 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 27i,6n,19p,1267b,270s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on project2.pdf (4 pages, 263185 bytes).
+PDF statistics:
+ 48 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+
